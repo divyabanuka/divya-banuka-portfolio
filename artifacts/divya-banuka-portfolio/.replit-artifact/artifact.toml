@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Divya Banuka Portfolio"
+description = "A professional, responsive portfolio for Divya Banuka, a B.Tech Artificial Intelligence and Machine Learning student showcasing skills, education, projects, certifications, and contact links for recruiters."
+version = "1.0.0"
+id = "artifacts/divya-banuka-portfolio"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25467
+
+[services.development]
+run = "pnpm --filter @workspace/divya-banuka-portfolio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/divya-banuka-portfolio", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/divya-banuka-portfolio/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25467"
+BASE_PATH = "/"
